@@ -95,7 +95,7 @@ export default {
         'tel'
       ]
       validatorField.forEach((field) => {
-        if (this.form[field] == '') {
+        if (this.form[field] === '') {
           validated = false
           errors.push(`${field} canot be null`)
         }
@@ -104,10 +104,10 @@ export default {
         this.errorMsg = errors.map((error) => error + '<br/>').join('')
         this.dialog = true
       }
+      return validated
     },
     submit() {
-      if (this.validate()) {
-        this.$store.dispatch('setRegister', this.form)
+      if(this.validate()){
         this.$router.push('/register/step2')
       }
     }
