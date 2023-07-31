@@ -17,6 +17,7 @@
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.0.2",
     "@pinia/nuxt": "^0.4.11",
+    "firebase": "^10.1.0",
     "pinia": "^2.1.6",
     "sass": "^1.64.1",
     "vuetify": "^3.3.10",

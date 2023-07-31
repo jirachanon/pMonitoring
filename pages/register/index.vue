@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import {addUsers} from '~/api/userRegister'
 
 export default {
   data() {
@@ -106,9 +107,14 @@ export default {
       }
       return validated
     },
-    submit() {
+    async submit() {
       if(this.validate()){
-        this.$router.push('/register/step2')
+        try {
+          await addUsers(this.form)
+          this.$router.push('/register/step2')
+        } catch (error) {
+          
+        }
       }
     }
   }
