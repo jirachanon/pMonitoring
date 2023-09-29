@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
+    "deploy-fb": "cd .output/server && rd /s /q node_modules && npm i && cd ..  && firebase deploy",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -12,6 +13,9 @@
     "@mdi/font": "^7.2.96",
     "@nuxt/devtools": "latest",
     "@types/node": "^18.17.0",
+    "firebase-admin": "^11.11.0",
+    "firebase-functions": "^4.4.1",
+    "firebase-functions-test": "^3.1.0",
     "nuxt": "^3.6.5"
   },
   "dependencies": {

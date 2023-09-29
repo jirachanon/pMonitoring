@@ -1,0 +1,11 @@
+{
+  "functions": { "source": ".output/server", "runtime": "nodejs16" },
+  "hosting": [
+    {
+      "site": "monitoring-test-e6e36",
+      "public": ".output/public",
+      "cleanUrls": true,
+      "rewrites": [{ "source": "**", "function": "server" }]
+    }
+  ]
+}
