@@ -1,7 +1,7 @@
 <template>
     <v-layout>
       <v-app-bar density="compact" flat>
-        <v-app-bar-title>สมัครสมาชิค</v-app-bar-title>
+        <v-app-bar-title>ผลการวัดความดัน</v-app-bar-title>
       </v-app-bar>
   
       <v-main>
@@ -13,21 +13,19 @@
   
             <v-col cols="12">
               <v-form fast-fail @submit.prevent>
-                <v-text-field v-model="form.firstName" label="ชื่อ" aria-required="true" class="pt-0 pb-0"
+                <v-text-field v-model="form.sys" label="SYS" aria-required="true" class="pt-0 pb-0"
                   variant="underlined"></v-text-field>
   
-                <v-text-field v-model="form.lastName" label="สกุล" aria-required="true" class="pt-0 pb-0"
+                <v-text-field v-model="form.dia" label="DIA" aria-required="true" class="pt-0 pb-0"
                   variant="underlined"></v-text-field>
   
-                <v-text-field v-model="form.hn" label="Hospital Number" aria-required="true" class="pt-0 pb-0"
+                <v-text-field v-model="form.pulse" label="Pulse" aria-required="true" class="pt-0 pb-0"
                   variant="underlined"></v-text-field>
   
-                <v-text-field v-model="form.tel" label="เบอร์โทรศัพท์" aria-required="true" class="pt-0 pb-0"
-                  variant="underlined"></v-text-field>
               </v-form>
             </v-col>
   
-            <v-col cols="12" class="gender-group d-flex">
+            <!-- <v-col cols="12" class="gender-group d-flex">
               <p>Gender</p>
               <div class="circle" :class="form.gender == 1 ? 'active' : ''" @click="chooseGender(1)">
                 <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="35" height="46" fill="currentColor"
@@ -47,7 +45,7 @@
                 </svg>
               </div>
               <p>เพศชาย</p>
-            </v-col>
+            </v-col> -->
   
             <v-col cols="12">
               <v-btn flat block rounded="xl" size="large" @click="submit">ตกลง</v-btn>
@@ -74,26 +72,20 @@
         dialog: false,
         errorMsg: '',
         form: {
-          firstName: '',
-          lastName: '',
-          hn: '',
-          tel: '',
-          gender: 1
+          sys: '',
+          dia: '',
+          pulse: '',
         }
       }
     },
     methods: {
-      chooseGender(gender) {
-        this.form.gender = gender
-      },
       validate() {
         let validated = true
         const errors = []
         const validatorField = [
-          'firstName',
-          'lastName',
-          'hn',
-          'tel'
+          'sys',
+          'dia',
+          'pulse'
         ]
         validatorField.forEach((field) => {
           if (this.form[field] === '') {
@@ -110,8 +102,8 @@
       async submit() {
         if(this.validate()){
           try {
-            await addUsers(this.form)
-            this.$router.push('/register/step2')
+            // await addUsers(this.form)
+            this.$router.push('./bp/ok')
           } catch (error) {
             
           }
