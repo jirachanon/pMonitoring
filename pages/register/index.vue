@@ -98,7 +98,7 @@ export default {
       validatorField.forEach((field) => {
         if (this.form[field] === '') {
           validated = false
-          errors.push(`${field} canot be null`)
+          errors.push(`${field} ยังไม่มีข้อมูล`)
         }
       })
       if (!validated) {

@@ -122,3 +122,17 @@ export const getBPChart = (user) => {
     });
   });
 };
+
+export const addBP = async ({ sys, dia, pulse }) => {
+  try {
+    await addDoc(collection(db, "bp"), {
+      sys: sys,
+      dia: dia,
+      pulse: pulse,
+      createdAt: Timestamp.now(),
+      changeAt: Timestamp.now(),
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};

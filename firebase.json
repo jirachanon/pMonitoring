@@ -1,5 +1,5 @@
 {
-  "functions": { "source": ".output/server", "runtime": "nodejs16" },
+  "functions": { "source": ".output/server" },
   "hosting": [
     {
       "site": "monitoring-test-e6e36",
