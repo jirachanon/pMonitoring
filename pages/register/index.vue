@@ -67,8 +67,22 @@
 
 <script>
 import {addUsers} from '~/api/userRegister'
+import { liff } from "@line/liff";
 
 export default {
+  mounted(){
+    liff.init({
+      liffId: '2000946477-revOxQzB'
+    }).then(() => {
+      if (liff.isLoggedIn()) {
+        liff.getProfile().then( profile => {
+          console.log(profile)
+        })
+      }else {
+        liff.login()
+      }
+    })
+  },
   data() {
     return {
       dialog: false,

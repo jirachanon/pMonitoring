@@ -72,7 +72,7 @@ export default {
         }
         if (parseInt(this.form[field]) < 40) {
           validated = false
-          errors.push(`${field} ค่าน้อยไปไอสัส`)
+          errors.push(`${field} ค่าต่ำเกินความเป็นจริง`)
         }
       })
       if (!validated) {
