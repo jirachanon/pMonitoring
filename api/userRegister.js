@@ -33,14 +33,15 @@ export const getBPs = (user, setBPs) => {
   }
 };
 
-export const addUsers = async ({ firstName, lastName, hn, tel, gender }) => {
+export const addUsers = async ({ firstName, lastName, hn, tel, gender, userId }) => {
   try {
     await addDoc(collection(db, "users"), {
         firstname : firstName,
         lastname : lastName,
         hn : hn,
         tel : tel,
-        gender : gender
+        gender : gender,
+        userId: userId
     });
   } catch (err) {
     console.log(err);

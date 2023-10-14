@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-app-bar density="compact" flat>
-      <v-app-bar-title>สมัครสมาชิค</v-app-bar-title>
+      <v-app-bar-title>สมัครสมาชิก</v-app-bar-title>
     </v-app-bar>
 
     <v-main>
@@ -76,7 +76,8 @@ export default {
     }).then(() => {
       if (liff.isLoggedIn()) {
         liff.getProfile().then( profile => {
-          console.log(profile)
+          this.form.userId = profile.userId
+          console.log(profile.userId)
         })
       }else {
         liff.login()
@@ -92,7 +93,13 @@ export default {
         lastName: '',
         hn: '',
         tel: '',
-        gender: 1
+        gender: 1,
+        userId: ''
+      },
+      lineProfile: {
+        pictureUrl: '',
+        displayName: '',
+        statusMassage: '',
       }
     }
   },
