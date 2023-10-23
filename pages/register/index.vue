@@ -68,22 +68,27 @@
 <script>
 import {addUsers} from '~/api/userRegister'
 import { liff } from "@line/liff";
+import { userStore } from "~/stores/userStore"
 
 export default {
-  mounted(){
-    liff.init({
-      liffId: '2000946477-revOxQzB'
-    }).then(() => {
-      if (liff.isLoggedIn()) {
-        liff.getProfile().then( profile => {
-          this.form.userId = profile.userId
-          console.log(profile.userId)
-        })
-      }else {
-        liff.login()
-      }
-    })
+  setup(){
+    const userData = userStore();
+    return { userData };
   },
+  // mounted(){
+  //   liff.init({
+  //     liffId: '2000946477-revOxQzB'
+  //   }).then(() => {
+  //     if (liff.isLoggedIn()) {
+  //       liff.getProfile().then( profile => {
+  //         this.form.userId = profile.userId
+  //         console.log(profile.userId)
+  //       })
+  //     }else {
+  //       liff.login()
+  //     }
+  //   })
+  // },
   data() {
     return {
       dialog: false,
@@ -131,7 +136,8 @@ export default {
     async submit() {
       if(this.validate()){
         try {
-          await addUsers(this.form)
+          // await addUsers(this.form)
+          this.userData.setRegister(this.form)
           this.$router.push('/register/step2')
         } catch (error) {
           

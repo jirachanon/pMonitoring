@@ -23,8 +23,7 @@ export default defineNuxtConfig({
   ],
   pinia: {
     autoImports: [
-      'defineStore',
-      ['defineStore', 'definePiniaStore'],
+      'defineStore', 'acceptHMRUpdate'
     ],
   },
   imports: {
