@@ -1,15 +1,12 @@
 import { defineStore } from "pinia"
+import { useLocalStorage } from "@vueuse/core"
 
-export const userStore = defineStore('user', {
-    state: () => ({
-        register: { }
-    }),
-    getters: {
-      getRegister: (state) => state.register
-    },
-    actions: {
-      setRegister(data) {
-        state.register = data
-      }
-    },
+export const userStore = defineStore('user', () => {
+    const user = useLocalStorage('users', {})
+
+    function setRegister (data) {
+        user.value = data
+    }
+
+    return {user, setRegister}
   })
