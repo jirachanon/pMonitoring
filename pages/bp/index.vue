@@ -97,46 +97,5 @@ export default {
 }
 </script>
   
-<style lang="scss">
-.v-form {
-  padding: 0 10px;
-}
-
-.gender-group {
-  p {
-    margin-bottom: 0;
-    align-self: center;
-    margin-right: 20px;
-  }
-
-  .circle {
-    width: 45px;
-    height: 45px;
-    color: white;
-    border-radius: 50%;
-    position: relative;
-    background-color: rgba($color: #000000, $alpha: 0.3);
-    margin-right: 7px;
-
-    &.active {
-      background: #1ABC9C;
-    }
-  }
-
-  svg {
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-.v-btn {
-  color: white;
-  background-color: #1ABC9C;
-  margin-top: 25px;
-  font-size: 20px;
-}
-</style>
+<style lang="scss" src="@/assets/scss/bp.scss"></style>
   
