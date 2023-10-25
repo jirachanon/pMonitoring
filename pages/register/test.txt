@@ -1,0 +1,75 @@
+export default {
+  setup(){
+    const userData = userStore();
+    return { userData };
+  },
+  // mounted(){
+  //   liff.init({
+  //     liffId: '2000946477-revOxQzB'
+  //   }).then(() => {
+  //     if (liff.isLoggedIn()) {
+  //       liff.getProfile().then( profile => {
+  //         this.form.userId = profile.userId
+  //         console.log(profile.userId)
+  //       })
+  //     }else {
+  //       liff.login()
+  //     }
+  //   })
+  // },
+  data() {
+    return {
+      dialog: false,
+      errorMsg: '',
+      form: {
+        firstName: '',
+        lastName: '',
+        hn: '',
+        tel: '',
+        gender: 1,
+        userId: ''
+      },
+      lineProfile: {
+        pictureUrl: '',
+        displayName: '',
+        statusMassage: '',
+      }
+    }
+  },
+  methods: {
+    chooseGender(gender) {
+      this.form.gender = gender
+    },
+    validate() {
+      let validated = true
+      const errors = []
+      const validatorField = [
+        'firstName',
+        'lastName',
+        'hn',
+        'tel'
+      ]
+      validatorField.forEach((field) => {
+        if (this.form[field] === '') {
+          validated = false
+          errors.push(`${field} ยังไม่มีข้อมูล`)
+        }
+      })
+      if (!validated) {
+        this.errorMsg = errors.map((error) => error + '<br/>').join('')
+        this.dialog = true
+      }
+      return validated
+    },
+    async submit() {
+      if(this.validate()){
+        try {
+          this.userData.setRegister(this.form)
+          this.$router.push('/register/step2')
+        } catch (error) {
+          
+        }
+      }
+    }
+  }
+}

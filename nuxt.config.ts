@@ -23,7 +23,7 @@ export default defineNuxtConfig({
         download: true,
         inject: true
       }
-    }]
+    }],
   ],
   pinia: {
     autoImports: [
@@ -35,6 +35,6 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: "firebase"
-  }
+  },
 
 })

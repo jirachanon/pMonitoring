@@ -12,22 +12,22 @@
           </v-col>
 
           <v-col cols="12">
-            <v-form fast-fail @submit.prevent>
-              <v-text-field v-model="form.firstName" label="ชื่อ" aria-required="true" class="pt-0 pb-0"
+            <v-form @submit.prevent="submit">
+              <v-text-field v-model="firstName.value.value" :error-messages="firstName.errorMessage.value" label="ชื่อ" aria-required="true" class="pt-0 pb-0"
                 variant="underlined"></v-text-field>
 
-              <v-text-field v-model="form.lastName" label="สกุล" aria-required="true" class="pt-0 pb-0"
+              <v-text-field v-model="lastName.value.value" :error-messages="lastName.errorMessage.value" label="สกุล" aria-required="true" class="pt-0 pb-0"
                 variant="underlined"></v-text-field>
 
-              <v-text-field v-model="form.hn" label="Hospital Number" aria-required="true" class="pt-0 pb-0"
+              <v-text-field v-model="hn.value.value" :error-messages="hn.errorMessage.value" label="Hospital Number" aria-required="true" class="pt-0 pb-0"
                 variant="underlined"></v-text-field>
 
-              <v-text-field v-model="form.tel" label="เบอร์โทรศัพท์" aria-required="true" class="pt-0 pb-0"
+              <v-text-field v-model="tel.value.value" :error-messages="tel.errorMessage.value" label="เบอร์โทรศัพท์" aria-required="true" class="pt-0 pb-0"
                 variant="underlined"></v-text-field>
             </v-form>
           </v-col>
 
-          <v-col cols="12" class="gender-group d-flex">
+          <!-- <v-col cols="12" class="gender-group d-flex">
             <p>Gender</p>
             <div class="circle" :class="form.gender == 1 ? 'active' : ''" @click="chooseGender(1)">
               <icons-female />
@@ -37,106 +37,61 @@
                 <icons-male />
             </div>
             <p>เพศชาย</p>
-          </v-col>
+          </v-col> -->
 
           <v-col cols="12">
-            <v-btn flat block rounded="xl" size="large" @click="submit">ตกลง</v-btn>
+            <v-btn flat block rounded="xl" size="large">ตกลง</v-btn>
           </v-col>
         </v-row>
       </v-container>
 
-      <v-dialog v-model="dialog" width="auto">
+      <!-- <v-dialog v-model="dialog" width="auto">
         <v-card>
           <v-card-title>กรุณากรอกข้อมูลให้ครบถ้วน</v-card-title>
           <v-card-text v-html="errorMsg"></v-card-text>
         </v-card>
-      </v-dialog>
+      </v-dialog> -->
       
     </v-main>
   </v-layout>
 </template>
 
-<script>
-import {addUsers} from '~/api/userRegister'
-import { liff } from "@line/liff";
-import { userStore } from "~/stores/userStore";
+<script setup>
+  import { ref } from 'vue'
+  import { useField, useForm } from 'vee-validate'
 
-export default {
-  setup(){
-    const userData = userStore();
-    return { userData };
-  },
-  // mounted(){
-  //   liff.init({
-  //     liffId: '2000946477-revOxQzB'
-  //   }).then(() => {
-  //     if (liff.isLoggedIn()) {
-  //       liff.getProfile().then( profile => {
-  //         this.form.userId = profile.userId
-  //         console.log(profile.userId)
-  //       })
-  //     }else {
-  //       liff.login()
-  //     }
-  //   })
-  // },
-  data() {
-    return {
-      dialog: false,
-      errorMsg: '',
-      form: {
-        firstName: '',
-        lastName: '',
-        hn: '',
-        tel: '',
-        gender: 1,
-        userId: ''
+  const { handleSubmit } = useForm({
+    validationSchema: {
+      firstName (value) {
+        if (value) return true
+
+        return 'กรุณากรอกข้อมูล'
       },
-      lineProfile: {
-        pictureUrl: '',
-        displayName: '',
-        statusMassage: '',
+      lastName (value) {
+        if (value) return true
+
+        return 'กรุณากรอกข้อมูล'
+      },
+      hn (value) {
+        if (value) return true
+
+        return 'กรุณากรอกข้อมูล'
+      },
+      tel (value) {
+        if (value) return true
+
+        return 'กรุณากรอกข้อมูล'
       }
     }
-  },
-  methods: {
-    chooseGender(gender) {
-      this.form.gender = gender
-    },
-    validate() {
-      let validated = true
-      const errors = []
-      const validatorField = [
-        'firstName',
-        'lastName',
-        'hn',
-        'tel'
-      ]
-      validatorField.forEach((field) => {
-        if (this.form[field] === '') {
-          validated = false
-          errors.push(`${field} ยังไม่มีข้อมูล`)
-        }
-      })
-      if (!validated) {
-        this.errorMsg = errors.map((error) => error + '<br/>').join('')
-        this.dialog = true
-      }
-      return validated
-    },
-    async submit() {
-      if(this.validate()){
-        try {
-          await addUsers(this.form)
-          this.userData.setRegister(this.form)
-          this.$router.push('/register/step2')
-        } catch (error) {
-          
-        }
-      }
-    }
-  }
-}
+  })
+  const firstName = useField('firstName')
+  const lastName = useField('lastName')
+  const hn = useField('hn')
+  const tel = useField('tel')
+
+  const submit = handleSubmit(values => {
+    alert(JSON.stringify(values, null, 2))
+  })
 </script>
 
 <style lang="scss" src="@/assets/scss/register.scss"></style>
